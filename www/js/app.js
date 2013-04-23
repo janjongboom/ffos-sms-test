@@ -10,28 +10,11 @@ define(["angular"], function() {
         .when('/', {
           templateUrl: 'views/list.html',
           controller: 'ListCtrl'
-        })
-        .when('/detail/:id', {
-          templateUrl: 'views/detail.html',
-          controller: 'DetailCtrl'
-        })
-        .when('/add', {
-          templateUrl: 'views/edit.html',
-          controller: 'AddCtrl'
-        })
-        .when('/edit/:id', {
-          templateUrl: 'views/edit.html',
-          controller: 'EditCtrl'
-        })
-        .otherwise({
-          redirectTo: '/'
         });
     }])
     .run(function($templateCache, $http) {
       // these are the items that we'll load into cache on app startup
       [
-        'views/detail.html',
-        'views/edit.html',
         'views/list.html'
       ].forEach(function(path) {
         $http.get(path, { cache: $templateCache });

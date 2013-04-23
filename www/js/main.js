@@ -31,15 +31,14 @@ require.config({
     'app',
     'js/mobile-nav.js',
     
+    // filters
+    'js/filters/friendlyday.js',
+    
     // services
-    'js/services/database.js',
-    'js/services/dates.js',
+    'js/services/sms.js',
     
     // controllers
     'js/controllers/list.js',
-    'js/controllers/add.js',
-    'js/controllers/detail.js',
-    'js/controllers/edit.js'
   ], function() {
     // done loading
     jQuery.holdReady(false);

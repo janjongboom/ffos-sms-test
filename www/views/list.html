@@ -1,20 +1,35 @@
-<link rel="stylesheet" type="text/css" href="shared/style_unstable/lists.css" />
-<link rel="stylesheet" type="text/css" href="shared/style/headers.css" />
-
 <section role="region">
   <header>
     <menu type="toolbar">
-      <button ng-tap="$navigate.go('/add', 'modal')"><span class="icon icon-add">add</span></button>
+      <a ng-tap="$navigate.go('/compose', 'slide')" id="icon-add">
+        <span class="icon icon-compose"></span>
+      </a>
+      <a href="edit()" id="threads-edit-icon">
+        <span class="icon icon-edit"></span>
+      </a>
     </menu>
-    <h1>My items</h1>
+    <h1 data-l10n-id="messages">Messages</h1>
   </header>
 </section>
-<section data-type="list" class="view">
-  <ul>
-    <li ng-repeat="item in items">
-      <a ng-tap="$navigate.go('/detail/' + item.id, 'slide')">
-        <p>{{item.title}}</p>
-      </a>
-    </li>
-  </ul>
-</section>
+<div id="threads-no-messages" ng-show="days.length == 0">
+  <div id="no-result-message">
+    <p>No messages</p>
+    <p>Start communicating now</p>
+  </div>
+</div>
+
+<article id="threads-container" class="view-body" data-type="list" ng-show="days.length > 0">
+  <div ng-repeat="day in days">
+    <header data-is-thread="true">{{day.date | friendlyday}}</header>
+    <ul>
+      <li ng-repeat="msg in day.messages">
+        <a ng-tap="$navigate.go('/detail/' + msg.participants[0], 'slide')" class="{{ msg.unreadCount > 0 && 'unread' }}">
+          <aside class="icon icon-unread">unread</aside>
+          <aside class="pack-end"><img src=""></aside>
+          <p class="name">{{msg.participants[0]}}</p>
+          <p><time>{{msg.timestamp | date:'shortTime'}}</time>{{msg.body}}</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</article>
